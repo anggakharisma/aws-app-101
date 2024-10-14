@@ -50,8 +50,10 @@
 ## Assignment Details
 Login details
 
+```
 email: admin@test.com
 password: password
+```
 
 ## How to run
 ```
