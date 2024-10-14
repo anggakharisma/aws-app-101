@@ -56,7 +56,7 @@ password: password
 
 ## How to run
 ```
-JWT_SECRET=super_secret_jwt docker compose up --build
+JWT_SECRET=super_secret_jwt docker compose up -d --build
 docker exec -it aws-api python3 seed.py # seed the data first
 
 then open http://localhost:8230
