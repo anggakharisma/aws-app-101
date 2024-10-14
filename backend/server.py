@@ -25,12 +25,10 @@ def login():
                 "message": 'User or password might be wrong'
             }), 404
 
-
         # incoming password
-        salt = bcrypt.gensalt()
-        request_passwod = content['password'].encode('utf-8')
-        request_hashed =  bcrypt.hashpw(request_passwod, salt)
-        result = bcrypt.checkpw(content['password'].encode('utf-8'),
+        request_password = content['password'].encode('utf-8')
+        request_hashed =  bcrypt.hashpw(request_password, bcrypt.gensalt())
+        result = bcrypt.checkpw(request_password,
                                 user['password'].encode('utf-8'))
 
         if result == False:

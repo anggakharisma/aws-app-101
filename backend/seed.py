@@ -7,10 +7,10 @@ db = client['aws_101']
 
 p = bcrypt.hashpw('password'.encode('utf-8'), bcrypt.gensalt())
 
-db['users'].create_index([("email", pymongo.DESCENDING)], unique=True)
+db['users'].create_index([("email", pymongo.ASCENDING)], unique=True)
 
 db.users.insert_one({
         'name': 'User test',
-        'email': 'admin2@test.com',
+        'email': 'admin@test.com',
         'password': p.decode('utf-8')
     })
