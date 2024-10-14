@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from pymongo import MongoClient
 import jwt
@@ -12,6 +13,8 @@ client = MongoClient()
 db = client['aws_101']
 
 app = Flask(__name__)
+CORS(app)
+
 @app.post("/login")
 def login():
     try:

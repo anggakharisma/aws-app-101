@@ -3,3 +3,4 @@ python-dotenv==1.0.1
 PyJWT==2.9.0
 pymongo==4.10.1
 bcrypt==4.2.0
+Flask-Cors==5.0.0
