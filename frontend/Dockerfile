@@ -5,6 +5,7 @@ COPY package.json .
 
 RUN npm install
 COPY . .
+ENV VITE_API_URL=http://127.0.0.1:8123
 RUN npm run build
 
 FROM nginx:latest

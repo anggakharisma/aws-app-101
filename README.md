@@ -46,7 +46,6 @@
 ## Bouns (Infrastructure as code)
 
 - Creating Load Balancer and EC2 with Auto Scaling Group using Terraform
-
 ## Assignment Details
 Login details
 
@@ -57,5 +56,9 @@ password: password
 
 ## How to run
 ```
-JWT_SECRET=super_secret_jwt docker compose up
+JWT_SECRET=super_secret_jwt docker compose up --build
+docker exec -it aws-api python3 seed.py # seed the data first
+
+then open http://localhost:8230
+
 ```

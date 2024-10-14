@@ -6,4 +6,4 @@ RUN pip install -r requirements.txt
 ENV PORT=8123
 
 EXPOSE 8123
-CMD [ "python", "server.py" ]
+CMD [ "python3", "-m" , "flask", "--app", "server", "run", "--host=0.0.0.0"]

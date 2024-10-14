@@ -8,23 +8,27 @@ function App() {
   const [error, setError] = useState(null)
 
   const login = async (data: { email: string, password: string }) => {
-    setError(null)
-    setStaus("LOADING")
-    const r = await fetch(`${import.meta.env['VITE_API_URL']}/login/`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
+    try {
+      setError(null)
+      setStaus("LOADING")
+      const r = await fetch(`${import.meta.env['VITE_API_URL']}/login/`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
 
-    if (!r.ok) {
+      if (!r.ok) {
+        setError(await r.json())
+        throw new Error(JSON.stringify(await r.json()))
+      }
+      console.log(await r.json())
+      setStaus("AUTHENTICATED")
+    } catch (e) {
       setStaus("UNAUTHENTICATED")
-      setError(await r.json())
-      return
+      console.log(e)
     }
-    console.log(await r.json())
-    setStaus("AUTHENTICATED")
   }
 
   return (
