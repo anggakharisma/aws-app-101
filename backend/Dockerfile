@@ -1,3 +1,9 @@
 FROM python:alpine3.20
+WORKDIR /app
 
-EXPOSE 8080
+COPY . .
+RUN pip install -r requirements.txt
+ENV PORT=8123
+
+EXPOSE 8123
+CMD [ "python", "server.py" ]

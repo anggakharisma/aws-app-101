@@ -2,7 +2,9 @@ import pymongo
 import bcrypt
 from dotenv import load_dotenv
 
-client = pymongo.MongoClient()
+from pymongo import MongoClient
+
+client = MongoClient(os.getenv("MONGO_HOST"))
 db = client['aws_101']
 
 p = bcrypt.hashpw('password'.encode('utf-8'), bcrypt.gensalt())

@@ -1,20 +1,26 @@
-version: '3.9'
 services:
   mongodb:
     image: mongo:latest
+    container_name: aws-mongodb
     ports:
     - 27017:27017
   api:
     build: ./backend
-    image: python:alpine3.20
+    image: aws-api
+    container_name: aws-api
+    environment:
+      - MONGO_HOST=aws-mongodb
     depends_on:
     - "mongodb"
     ports:
-    - 8080:8080
+    - 8123:8123
   frontend:
     build: ./frontend
-    image: frontend:latest
+    image: aws-app
+    container_name: aws-app
+    environment:
+      - VITE_API_URL=api
     ports:
-    - 80:3000
+    - 8230:80
     depends_on:
     - "api"

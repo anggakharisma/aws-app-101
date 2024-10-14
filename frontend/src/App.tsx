@@ -10,7 +10,7 @@ function App() {
   const login = async (data: { email: string, password: string }) => {
     setError(null)
     setStaus("LOADING")
-    const r = await fetch(`${import.meta.env['VITE_API_URL']}/login`, {
+    const r = await fetch(`${import.meta.env['VITE_API_URL']}/login/`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

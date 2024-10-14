@@ -9,7 +9,7 @@ import bcrypt
 
 load_dotenv()
 
-client = MongoClient()
+client = MongoClient(os.getenv("MONGO_HOST"))
 db = client['aws_101']
 
 app = Flask(__name__)
@@ -51,6 +51,7 @@ def login():
         print(str(e))
         return jsonify({
             'message': 'Something went wrong',
+            'err': str(e)
         }), 500
 
 @app.route("/")

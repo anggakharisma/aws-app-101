@@ -41,7 +41,18 @@
 ## AWS
 
 - A high level AWS arhitecture diagram
+![Diagram](basic_arch.png "basic diagram")
 
 ## Bouns (Infrastructure as code)
 
 - Creating Load Balancer and EC2 with Auto Scaling Group using Terraform
+
+## Assignment Details
+Login details
+email: admin@test.com
+password: password
+
+## How to run
+```
+JWT_SECRET=super_secret_jwt docker compose up
+```
