@@ -4,17 +4,39 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 import jwt
 import os
+import bcrypt
 
 load_dotenv()
 
 client = MongoClient()
-db = client['aws-101']
+db = client['aws_101']
 
 app = Flask(__name__)
 @app.post("/login")
 def login():
     try:
         content = request.json
+        user = db['users'].find_one({ 
+            'email': content['email']
+        })
+
+        if user == None:
+            return jsonify({
+                "message": 'User or password might be wrong'
+            }), 404
+
+
+        # incoming password
+        salt = bcrypt.gensalt()
+        request_passwod = content['password'].encode('utf-8')
+        request_hashed =  bcrypt.hashpw(request_passwod, salt)
+        result = bcrypt.checkpw(content['password'].encode('utf-8'),
+                                user['password'].encode('utf-8'))
+
+        if result == False:
+            return jsonify({
+                "message": 'User or password might be wrong'
+            }), 404
 
         token = jwt.encode({
             "email": content['email'],
@@ -24,9 +46,10 @@ def login():
             'email': content['email'],
             'token': token
         }), 200
-    except:
+    except Exception as e:
+        print(str(e))
         return jsonify({
-            'message': 'Something went wrong'
+            'message': 'Something went wrong',
         }), 500
 
 @app.route("/")
