@@ -13,8 +13,9 @@ function App() {
       setStaus("LOADING")
       const r = await fetch(`${import.meta.env['VITE_API_URL']}/login/`, {
         method: "POST",
+        mode: 'cors',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       })
@@ -58,8 +59,8 @@ function App() {
         }}>
           <p className='text-red-500 font-bold'>{error ? error['message'] : null}</p>
           <h1 className='text-2xl font-bold text-center'>Enter your credentials</h1>
-          <input autoFocus className='border-[1px] border-gray-300 px-4 py-2 rounded-md' type='email' placeholder='admin@test.com' name='email' />
-          <input className='border-[1px] border-gray-300 px-4 py-2 rounded-md' type='password' placeholder='password' name='password' />
+          <input required autoFocus className='border-[1px] border-gray-300 px-4 py-2 rounded-md' type='email' placeholder='admin@test.com' name='email' />
+          <input required className='border-[1px] border-gray-300 px-4 py-2 rounded-md' type='password' placeholder='password' name='password' />
           <button className='self-start bg-purple-600 px-6 py-2 rounded-md text-white font-medium'>Continue</button>
         </form>
       }

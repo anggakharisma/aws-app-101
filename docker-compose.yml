@@ -1,12 +1,19 @@
+networks:
+  aws-app:
+
 services:
   mongodb:
     image: mongo:latest
+    networks: 
+      - aws-app
     container_name: aws-mongodb
     ports:
     - 27017:27017
   api:
     build: ./backend
     image: aws-api
+    networks: 
+      - aws-app
     container_name: aws-api
     environment:
       - MONGO_HOST=aws-mongodb
@@ -19,6 +26,8 @@ services:
   frontend:
     build: ./frontend
     image: aws-app
+    networks: 
+      - aws-app
     container_name: aws-app
     environment:
       - VITE_API_URL=http://localhost:8123
@@ -26,3 +35,4 @@ services:
     - 8230:80
     depends_on:
     - "api"
+      

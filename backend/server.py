@@ -13,7 +13,7 @@ client = MongoClient(os.getenv("MONGO_HOST"))
 db = client['aws_101']
 
 app = Flask(__name__)
-CORS(app, origins="*")
+CORS(app)
 
 @app.post("/login")
 def login():
