@@ -9,11 +9,11 @@ function App() {
 
   const login = async (data: { email: string, password: string }) => {
     try {
+      console.log(data)
       setError(null)
       setStaus("LOADING")
-      const r = await fetch(`${import.meta.env['VITE_API_URL']}/login/`, {
+      const r = await fetch(`${import.meta.env['VITE_API_URL']}/login`, {
         method: "POST",
-        mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
